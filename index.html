@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<title>トモダチ</title>
+
+<style>
+</style>
+
+
+</head>
+
+
+<body>
+
+<div style="text-align: center; ">
+<h1>トモダチ</h1>
+<b>～撫でると顔文字が「わーい」と返してくれる奴(仮)～</b>
+<hr>
+<br>
+<br>
+
+<h1><span style="border: double 5px black; padding:50px 60px;">(<span id="emo"></span>・ω・)</span></h1>
+<div style="font-size:20px;">
+<span id="str"></span><br>
+
+<div style="margin: 5px;">Level:<span id="level">0</span>
+所持金:<span id="money">0</span><br>
+好感度<span id="love">0</span> </div>
+</div>
+
+
+<form>
+<input type="button" value="撫でる" style="font-size:15px;cursor:pointer; width:80px;height:60px;margin:0px 5px; border-radius:10px;" onclick="naderu()">
+<input type="button" value="叩く" style="font-size:15px;cursor:pointer; width:80px;height:60px;margin:0px 5px; border-radius:10px;" onclick="tataku()">
+<input type="button" value="つつく" id="tun" style="font-size:15px;cursor:pointer; width:80px;height:60px;margin:0px 5px; border-radius:10px;" onclick="tutuku()"><br>
+<input type="button" value="おやつ 50円" style="font-size:15px;cursor:pointer; width:80px;height:60px;margin:5px 5px; border-radius:10px; white-space: normal;" onclick="sonota1()">
+<input type="button" value="ケーキ 300円" style="font-size:15px;cursor:pointer; width:80px;height:60px;margin:5px 5px; border-radius:10px; white-space: normal;" onclick="sonota2()">
+<input type="button" value="遊園地 1000円" style="font-size:15px;cursor:pointer; width:80px;height:60px;margin:5px 5px; border-radius:10px; white-space: normal;" onclick="sonota3()"><br>
+<input type="button" value="アルバイト" style="font-size:15px;cursor:pointer; width:270px;height:30px;margin:5px;" onclick="bite()">
+
+<!--<inpt type="button" value="アルバイト" style="font-size:15px;corsor:pointer; width:270px;height:30px;" oncl
+ick="bite()">-->
+</form>
+
+
+</div>
+
+</span id="omake"><span>
+
+<script>
+var love = 0;
+var level = 0;
+var haba = 0;
+var money = 0;
+var TC = 0;
+var PC = 0;
+var kuria = 0;
+
+
+
+function write(id,moji){
+	document.getElementById(id).textContent = moji;
+}
+
+function nowLevel(){
+	level = Math.floor(love/10);
+	document.getElementById("level").textContent = level;
+}
+
+function downLevel(){
+if(level >=1){level = Math.floor(love/10);
+	document.getElementById("level").textContent = level;
+}else{
+level = 0;
+document.getElementById("level").textContent = level;
+}
+}
+
+function LoveUp(){
+	love= Math.round((love +1+(level*0.1))*10)/10
+	haba = Math.round((1+(level*0.1))*10)/10
+	document.getElementById("love").textContent = love +" ♥+"+haba;
+}
+
+function LoveDown(){
+
+	love= Math.round((love -1)*10)/10
+	haba = 1
+	document.getElementById("love").textContent = love +" ♥-"+haba;
+}
+
+
+function naderu(){
+	UpText();     
+	LoveUp();	
+	nowLevel();
+	end();
+}
+
+
+
+function tataku(){
+	if (PC <= 30 ){
+	DownText();
+	LoveDown();
+	downLevel();
+	PC ++ ; 
+	}else{
+	DontP();
+	}
+}
+
+function DontP(){
+var res = confirm("ゲームオーバー！トモダチを叩いてはいけません。");
+if(res == true){
+	window.location.reload();
+}else{
+document.write("トモダチはどこかに行ってしまいました");
+
+}
+}
+
+function UpText(){
+var text = new Array();
+text[0] = "「わーい」";
+text[1] = "「やったー」";
+text[2] = "「えへへ」";
+text[3] = "「うれしー」"
+text[4] = "「すき！」"
+
+if(love < 100){
+var a = Math.round((Math.random()*3));
+write("str",text[a]);
+}else{
+var a = Math.round((Math.random()*4));
+write("str",text[a]);
+}
+
+write("emo","*")
+
+}
+
+function DownText(){
+var text = new Array();
+text[0] = "「やめて」";
+text[1] = "「うわー」";
+text[2] = "「ひゃー」";
+text[3] = "「わー」"
+text[4] = "「きらい！」"
+
+var emo = new Array(";","#","´",)
+
+if(love > 100){
+var a = Math.round((Math.random()*3));
+write("str",text[a]);
+var a = Math.round((Math.random()*2));
+write("emo",emo[a]);
+}else{
+var a = Math.round((Math.random()*4));
+write("str",text[a]);
+var a = Math.round((Math.random()*2));
+write("emo",emo[a]);
+}
+}
+
+function tutuku(){
+
+if(TC > 100 ){
+	write("str","「もうだめ」");
+	write("emo","");
+	const button = document.getElementById("tun");
+	button.disabled = true;
+}else if((TC % 7 == 0 )||(TC % 12 == 0)){
+	write("str","つんつくつん");
+	love= Math.round((love +0.1)*10)/10;
+	document.getElementById("love").textContent = love +"  ♥+"+0.1;
+	nowLevel();
+	write("emo","σ)");
+	TC ++;
+}else{
+	write("str","つんつん");
+	love= Math.round((love +0.1)*10)/10;
+	document.getElementById("love").textContent = love +"  ♥+"+0.1;
+	nowLevel();
+	write("emo","σ)");
+	TC ++;
+}
+
+}
+
+
+function bite(){
+	if(love<=4){write("str","バイトのまえになでてー");
+write("emo","´")}    
+else
+{
+	var text = new Array("「がんばれー」","「えらい！」","「おつかれさま」");
+	document.getElementById("love").textContent = love;
+	var a = Math.round((Math.random()*3));
+	write("str",text[a]);
+	var Mhaba= Math.floor(love/5);
+	money = money + Mhaba;
+	write("money",Math.floor(money)+"(+"+Mhaba+")");
+    write("emo","`");
+
+}
+}
+
+function sonota1(){
+if(money >= 50){
+money = money - 50;
+write("money",(Math.floor(money))+"円 (-50)");
+var text = new Array();
+text[0] = "「わー」";
+text[1] = "「やったー」";
+text[2] = "「もぐもぐ」";
+text[3] = "「うまー」";
+var a = Math.round((Math.random()*3));
+write("str",text[a]);
+write("emo","*")
+
+love= love +5
+haba= 5
+	document.getElementById("love").textContent = love +" ♥+"+haba;
+}else{
+write("str","「おかねないよー」");
+write("emo","´");}
+end();
+}
+
+function sonota2(){
+if(money >= 300){
+money = money - 300;
+write("money",(Math.floor(money))+"円 (-300)");
+var text = new Array();
+text[0] = "「うわぁー」";
+text[1] = "「しあわせー」";
+text[2] = "「もぐもぐ」";
+text[3] = "「さいこー」";
+var a = Math.round((Math.random()*3));
+write("str",text[a]);
+write("emo","*")
+love= love +30;
+haba= 30;
+document.getElementById("love").textContent = love +" ♥+"+haba;
+}else{
+write("str","「おかねないよー」");
+write("emo","´");
+}
+end();
+}
+
+function sonota3(){
+if(money >= 1000){
+money = money - 1000;
+write("money",(Math.floor(money))+"円 (-1000)");
+var text = new Array();
+text[0] = "「うきゃー」";
+text[1] = "「たのしー」";
+text[2] = "「ひゃほー」";
+text[3] = "「わはは」";
+var a = Math.round((Math.random()*3));
+write("str",text[a]);
+write("emo","*");
+
+love= love +100;
+haba= 100;
+	document.getElementById("love").textContent = love +" ♥+"+100;
+}else{
+write("str","「おかねないよー」");
+write("emo","´");
+}
+end();
+}
+
+function end(){
+if((love>1000)&&(kuria == 0)){
+alert('ゲームクリア！トモダチと仲良くなりました！');
+kuria ++ ;
+}
+}
+
+
+</script>
+
+
+</body>
+
+</html>
