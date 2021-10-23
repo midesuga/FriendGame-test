@@ -79,19 +79,26 @@ document.getElementById("level").textContent = level;
 }
 }
 
+
+function MoneyNull(){
+write("money",money+"円");
+}
+
+
+
 function LoveUp(){
+	MoneyNull();
 	love= Math.round((love +1+(level*0.1))*10)/10
 	haba = Math.round((1+(level*0.1))*10)/10
 	document.getElementById("love").textContent = love +" ♥+"+haba;
 }
 
 function LoveDown(){
-
+	MoneyNull();
 	love= Math.round((love -1)*10)/10
 	haba = 1
 	document.getElementById("love").textContent = love +" ♥-"+haba;
 }
-
 
 function naderu(){
 	UpText();     
@@ -167,7 +174,7 @@ write("emo",emo[a]);
 }
 
 function tutuku(){
-
+MoneyNull();
 if(TC > 100 ){
 	write("str","「もうだめ」");
 	write("emo","");
