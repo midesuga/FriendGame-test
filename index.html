@@ -12,7 +12,17 @@ text-align:center;
 border: double 5px black;
 margin:0px auto;
 width:300px;
+height:150px;
 }
+
+footer{
+background-color: azure;
+padding:10px;
+font-size:small;
+text-align:right;
+
+}
+
 </style>
 
 
@@ -24,19 +34,19 @@ width:300px;
 <div id="hontai" style="text-align: center; "> <!-- ゲーム画面 -->
 
 <h1>トモダチ</h1>
-<b>～撫でると顔文字が「わーい」と返してくれる奴(仮)～</b>
+～撫でると顔文字が「わーい」と返してくれる奴(仮)～
 <hr>
 
 <div id="kao">
-<h1>(<span id="emo"> </span>・ω・)</h1>
-<span id="str" style="font-size:large;" ></span>　
+<h1>(<span id="emo"></span>・ω・)</h1>
+<span id="str" style="font-size:20px;" >「やほー」</span>　
 </div>
 　　
-<div style="margin: 5px;font-size:20px;">		<!-- ステータス　-->
+<p style=" margin: 5px;font-size:large;">		<!-- ステータス　-->
 Level:<span id="level">0</span>　
 所持金:<span id="money">0</span><br>
 好感度<span id="love">0</span>
- </div>　　　　　　　					<!-- ステータス　-->
+ </p>　　　　　　　					<!-- ステータス　-->
 
 
 
@@ -55,7 +65,18 @@ ick="bite()">-->
 </form>
 
 
+
 </div > 
+<br>
+
+<div style="width:500px;margin:auto;">
+＝遊び方＝<br>
+1.撫でると好感度が上がります。<br>
+2.アルバイトをするとお金が溜まります。<br>
+3.お金を使って、おやつをあげたり遊園地に行ったりできます。<br>
+4.好感度を1000まで溜めるとクリアです。<br>
+</div>
+<br>
 
 
 <script>
@@ -208,12 +229,12 @@ if(TC > 100 ){
 
 
 function bite(){
-	if(love<=4){write("str","バイトのまえになでてー");
+	if(love<=4){write("str","「バイトのまえになでてー」");
 write("emo","´")}    
 else
 {
 	var text = new Array("「がんばれー」","「えらい！」","「おつかれさま」");
-	document.getElementById("love").textContent = love;
+	document.getElementById("love").textContent = love + "♥+0";
 	var a = Math.round((Math.random()*3));
 	write("str",text[a]);
 	var Mhaba= Math.floor(love/5);
@@ -301,6 +322,10 @@ kuria ++ ;
 
 </script>
 
+<footer>
+ トモダチ<br>
+ 制作：ららら
+</footer>
 
 </body>
 
