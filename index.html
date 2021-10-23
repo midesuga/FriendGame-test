@@ -7,6 +7,12 @@
 <title>トモダチ</title>
 
 <style>
+#kao{
+text-align:center;
+border: double 5px black;
+margin:0px auto;
+width:300px;
+}
 </style>
 
 
@@ -15,21 +21,24 @@
 
 <body>
 
-<div style="text-align: center; ">
+<div id="hontai" style="text-align: center; "> <!-- ゲーム画面 -->
+
 <h1>トモダチ</h1>
 <b>～撫でると顔文字が「わーい」と返してくれる奴(仮)～</b>
 <hr>
-<br>
-<br>
 
-<h1><span style="border: double 5px black; padding:50px 60px;">(<span id="emo"></span>・ω・)</span></h1>
-<div style="font-size:20px;">
-<span id="str"></span><br>
-
-<div style="margin: 5px;">Level:<span id="level">0</span>
-所持金:<span id="money">0</span><br>
-好感度<span id="love">0</span> </div>
+<div id="kao">
+<h1>(<span id="emo"> </span>・ω・)</h1>
+<span id="str" style="font-size:20px;" ></span>　
 </div>
+　　
+<div style="margin: 5px;font-size:20px;">		<!-- ステータス　-->
+Level:<span id="level">0</span>　
+所持金:<span id="money">0</span><br>
+好感度<span id="love">0</span>
+ </div>　　　　　　　					<!-- ステータス　-->
+
+
 
 
 <form>
@@ -46,9 +55,8 @@ ick="bite()">-->
 </form>
 
 
-</div>
+</div > 
 
-</span id="omake"><span>
 
 <script>
 var love = 0;
